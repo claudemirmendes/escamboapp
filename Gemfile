@@ -11,6 +11,7 @@ gem 'devise'
 gem 'devise-i18n'
 # Use SCSS for stylesheets
 gem 'sass-rails', '~> 4.0.3'
+gem 'bootstrap_sb_admin_base_v2'
 
 # Use Uglifier as compressor for JavaScript assets
 gem 'uglifier', '>= 1.3.0'

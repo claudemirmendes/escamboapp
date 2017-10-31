@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171031130910) do
+ActiveRecord::Schema.define(version: 20171031135731) do
 
   create_table "admins", force: :cascade do |t|
     t.string   "email",                  limit: 255, default: "", null: false
@@ -30,6 +30,18 @@ ActiveRecord::Schema.define(version: 20171031130910) do
 
   add_index "admins", ["email"], name: "index_admins_on_email", unique: true, using: :btree
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true, using: :btree
+
+  create_table "ads", force: :cascade do |t|
+    t.string   "title",       limit: 255
+    t.text     "description", limit: 65535
+    t.integer  "category_id", limit: 4
+    t.integer  "member_id",   limit: 4
+    t.datetime "created_at",                null: false
+    t.datetime "updated_at",                null: false
+  end
+
+  add_index "ads", ["category_id"], name: "index_ads_on_category_id", using: :btree
+  add_index "ads", ["member_id"], name: "index_ads_on_member_id", using: :btree
 
   create_table "categories", force: :cascade do |t|
     t.string   "description", limit: 255
@@ -55,4 +67,6 @@ ActiveRecord::Schema.define(version: 20171031130910) do
   add_index "members", ["email"], name: "index_members_on_email", unique: true, using: :btree
   add_index "members", ["reset_password_token"], name: "index_members_on_reset_password_token", unique: true, using: :btree
 
+  add_foreign_key "ads", "categories"
+  add_foreign_key "ads", "members"
 end
